@@ -1,0 +1,48 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--加载配置文件-->
+
+    <context:property-placeholder location="classpath:config/db.properties"/>
+    <!-- 配置连接池 数据源 使用dhcp-->
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="${jdbc.driver}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+    </bean>
+
+    <!-- 单例管理 SqlSessionFactory-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!--加载mybatis的配置文件-->
+        <property name="configLocation" value="classpath:config/mybatis/SqlMapConfig.xml"/>
+        <property name="dataSource" ref="dataSource"/>
+        <!-- 自动扫描mapping.xml文件 -->
+
+        <property name="mapperLocations" value="classpath:com/idoc/swagger/mapper/*.xml"></property>
+    </bean>
+
+    <!--mapper配置
+       MapperFactoryBean: 根据mapper接口生成代理对象
+    -->
+    <!--maperInterFace指定mapper接口
+  <bean id="userMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+
+      <property name="mapperInterface" value="com.springapp.mvc.mapper.UserAgentInter"/>
+      <property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+  </bean>
+-->
+    <!-- mapper批量扫描，从mapper包中扫描出mapper接口，自动创建代理对象并且在
+     spring容器中进行注册，用于mapper代理开发
+     如果将mapper.xml和mapper接口的名称保持一致且放在一个目录 则不用在sqlMapConfig.xml中进行配置
+     -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!-- 指定扫描的 包名 如果需要扫描多个包，中间用半角逗号隔开-->
+        <property name="basePackage" value="com.idoc.swagger.mapper"/>
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+    </bean>
+</beans>

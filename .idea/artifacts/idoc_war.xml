@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="idoc:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="swagger-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="idoc:war exploded" />
+    </root>
+  </artifact>
+</component>
