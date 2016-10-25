@@ -26,6 +26,14 @@ public class FindIdocController {
     public ModelAndView findIdocById() throws Exception {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("idoc", findIdocService.selectByPrimaryKey(1));
+        System.out.println("ddd");
+        modelAndView.setViewName("test");
+        return modelAndView;
+    }
+    @RequestMapping("/findInterfaceById")
+    public ModelAndView findInterfaceById(int id) throws Exception {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("idoc", findIdocService.selectByPrimaryKey(1));
         modelAndView.setViewName("test");
         return modelAndView;
     }

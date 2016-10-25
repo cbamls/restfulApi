@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j='http://jakarta.apache.org/log4j/'>
+
+    <!-- ========================== 自定义输出格式说明================================ -->
+    <!-- %p 输出优先级，即DEBUG，INFO，WARN，ERROR，FATAL -->
+    <!-- %r 输出自应用启动到输出该log信息耗费的毫秒数  -->
+    <!-- %c 输出所属的类目，通常就是所在类的全名 -->
+    <!-- %t 输出产生该日志事件的线程名 -->
+    <!-- %n 输出一个回车换行符，Windows平台为“/r/n”，Unix平台为“/n” -->
+    <!-- %d 输出日志时间点的日期或时间，默认格式为ISO8601，也可以在其后指定格式，-->
+    <!-- 比如：%d{yyy MMM dd HH:mm:ss,SSS}，输出类似：2002年10月18日 22：10：28，921  -->
+    <!-- %l 输出日志事件的发生位置，包括类目名、发生的线程，以及在代码中的行数。举例：Testlog4.main(TestLog4.java:10)  -->
+    <!-- ========================================================================== -->
+
+    <!-- ========================== 输出方式说明================================ -->
+    <!-- Log4j提供的appender有以下几种:  -->
+    <!-- org.apache.log4j.ConsoleAppender(控制台),  -->
+    <!-- org.apache.log4j.FileAppender(文件),  -->
+    <!-- org.apache.log4j.DailyRollingFileAppender(每天产生一个日志文件), -->
+    <!-- org.apache.log4j.RollingFileAppender(文件大小到达指定尺寸的时候产生一个新的文件),  -->
+    <!-- org.apache.log4j.WriterAppender(将日志信息以流格式发送到任意指定的地方)   -->
+    <!-- ========================================================================== -->
+    <!-- 输出日志到控制台  ConsoleAppender -->
+ <!--   <appender name="myConsole" class="org.apache.log4j.ConsoleAppender">
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+                   value="[%d{dd HH:mm:ss,SSS\} %-5p] [%t] %c{2\} - %m%n" />
+        </layout>
+        &lt;!&ndash;过滤器设置输出的级别&ndash;&gt;
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+            <param name="levelMin" value="debug" />
+            <param name="levelMax" value="warn" />
+            <param name="AcceptOnMatch" value="true" />
+        </filter>
+    </appender>-->
+    <appender name="myConsole"
+              class="org.apache.log4j.ConsoleAppender">
+        <param name="Threshold" value="info"></param>
+        <layout class="org.apache.log4j.TTCCLayout">
+            <param name="ConversionPattern" value="TTCCLayout"></param>
+        </layout>
+    </appender>
+    <!-- 输出日志到文件  每天一个文件 -->
+    <appender name="dailyRollingFile"
+              class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="Threshold" value="info"></param>
+        <param name="ImmediateFlush" value="true"></param>
+        <param name="File" value="c:/logs/dailyRollingFile.log"></param>
+        <param name="DatePattern" value="'.'yyyy-MM-dd'.log'"></param>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss\} %-5p] [%t] {%c:%L}-%m%n"></param>
+        </layout>
+    </appender>
+
+    <!-- 输出到日志文件  -->
+    <appender name="log4jTestDebug" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="D:/work/log/test_log4j_debug.log"/>
+        <param name="Append" value="true"/>
+        <param name="MaxFileSize" value="5KB"/>
+        <param name="MaxBackupIndex" value="2"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%c %d{ISO8601}-- %p -- %m%n"/>
+        </layout>
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+            <param name="LevelMin" value="DEBUG"/>
+            <param name="LevelMax" value="DEBUG"/>
+        </filter>
+    </appender>
+
+    <appender name="log4jTestLogInfo" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="D:/work/log/test_log4j_info.log"/>
+        <param name="Append" value="true"/>
+        <param name="MaxFileSize" value="5KB"/>
+        <param name="MaxBackupIndex" value="2"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%c %d{ISO8601}-- %p -- %m%n"/>
+        </layout>
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+            <param name="LevelMin" value="INFO"/>
+            <param name="LevelMax" value="INFO"/>
+        </filter>
+    </appender>
+
+    <appender name="CUSTOMIZATION" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="local/customization.log"/>
+        <param name="MaxBackupIndex" value="10"/>
+        <param name="MaxFileSize" value="1MB"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%-d{MM-dd HH:mm:ss:SSS}][%t][%p][%c]- %m %n" />
+        </layout>
+    </appender>
+
+    <!-- 输出日志到文件  文件大小到达指定尺寸的时候产生一个新的文件 -->
+    <appender name="COMMON" class="org.apache.log4j.RollingFileAppender">
+        <param name="File" value="local/error.log"/>
+        <param name="MaxBackupIndex" value="15"/>
+        <param name="MaxFileSize" value="1MB"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[%-d{MM-dd HH:mm:ss:SSS}][%t][%p][%c]- %m %n" />
+        </layout>
+    </appender>
+
+    <!--通过<category></category>的定义可以将各个包中的类日志输出到不同的日志文件中-->
+    <category name="com.qingyuan.huake">
+        <priority value="warn" />
+        <appender-ref ref="log4jTestLogInfo" />
+        <appender-ref ref="console" />
+    </category>
+
+    <!--通过<category></category>的定义可以将各个包中的类日志输出到不同的日志文件中-->
+    <category name="com.qingyuan.dream">
+        <priority value="warn" />
+        <appender-ref ref="log4jTestDebug" />
+        <appender-ref ref="console" />
+    </category>
+
+    <!--定义全局的日志输出级别,但是在输出目的地的配置中配置的具体输出级别优先级高于全局定义的优先级。
+    如果在railyFile中定义<param name="Threshold" value="info"></param>，那么将会把info以上级别的信息输出 -->
+    <root>
+        <priority value="DEBUG"/>
+        <appender-ref ref="myConsole" />
+    </root>
+
+</log4j:configuration>
+        <!--
+            Log4J Configuration Quick Reference:
+            ====================================
+            Priority order is DEBUG < INFO < WARN < ERROR < FATAL
+            PatternLayout conversion characters:
+            %c   Category of the logging event
+            %C   Fully qualified class name of the caller
+            %d   Date of the logging event  (example: %d{HH:mm:ss,SSS} )
+            %F   File name where the logging request was issued (caution: extremely slow)
+            %l   Location information of the caller (caution: extremely slow)
+            %L   Line number from where the logging request was issued (caution: extremely slow)
+            %m   Application-supplied message
+            %M   Method name from where the logging request was issued (caution: extremely slow)
+            %n   Line separator
+            %p   Priority of the logging event
+            %r   Number of milliseconds since the start of the application
+            %t   Name of the thread that generated the logging event
+            %x   Nested diagnotic context associated with the thread
+            %%   A single percent sign
+            Format modifiers examples:
+            %20c     Left pad with spaces if category is less than 20 characters long
+            %-20c    Right pad with spaces if category is less than 20 characters long
+            %.30c    Truncate from the beginning if category is more than 30 chars long
+            %20.30c  Left pad 20 chars + truncate from beginning if more than 30 chars
+            %-20.30c Right pad 20 chars + truncate from beginning if more than 30 chars
+
+            Examples:  "%r [%t] %-5p %c %x - %m\n"
+            "%-6r [%15.15t] %-5p %30.30c %x - %m\n"
+        -->
