@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.swagger.idoc.mapper.TDocSystemInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.swagger.idoc.po.TDocSystemInfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="appname" property="appname" jdbcType="TIMESTAMP" />
+    <result column="requestUrl" property="requesturl" jdbcType="TIMESTAMP" />
+    <result column="errorcode" property="errorcode" jdbcType="BIT" />
+    <result column="publisher" property="publisher" jdbcType="VARCHAR" />
+    <result column="titile" property="titile" jdbcType="VARCHAR" />
+    <result column="cancel_time" property="cancelTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.swagger.idoc.po.TDocSystemInfo" extends="BaseResultMap" >
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, appname, requestUrl, errorcode, publisher, titile, cancel_time
+  </sql>
+  <sql id="Blob_Column_List" >
+    content
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.swagger.idoc.po.TDocSystemInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_doc_system_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.swagger.idoc.po.TDocSystemInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_doc_system_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_doc_system_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_doc_system_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.swagger.idoc.po.TDocSystemInfo" >
+    insert into t_doc_system_info (id, appname, requestUrl, 
+      errorcode, publisher, titile, 
+      cancel_time, content)
+    values (#{id,jdbcType=INTEGER}, #{appname,jdbcType=TIMESTAMP}, #{requesturl,jdbcType=TIMESTAMP}, 
+      #{errorcode,jdbcType=BIT}, #{publisher,jdbcType=VARCHAR}, #{titile,jdbcType=VARCHAR}, 
+      #{cancelTime,jdbcType=TIMESTAMP}, #{content,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.swagger.idoc.po.TDocSystemInfo" >
+    insert into t_doc_system_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="appname != null" >
+        appname,
+      </if>
+      <if test="requesturl != null" >
+        requestUrl,
+      </if>
+      <if test="errorcode != null" >
+        errorcode,
+      </if>
+      <if test="publisher != null" >
+        publisher,
+      </if>
+      <if test="titile != null" >
+        titile,
+      </if>
+      <if test="cancelTime != null" >
+        cancel_time,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="appname != null" >
+        #{appname,jdbcType=TIMESTAMP},
+      </if>
+      <if test="requesturl != null" >
+        #{requesturl,jdbcType=TIMESTAMP},
+      </if>
+      <if test="errorcode != null" >
+        #{errorcode,jdbcType=BIT},
+      </if>
+      <if test="publisher != null" >
+        #{publisher,jdbcType=VARCHAR},
+      </if>
+      <if test="titile != null" >
+        #{titile,jdbcType=VARCHAR},
+      </if>
+      <if test="cancelTime != null" >
+        #{cancelTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.swagger.idoc.po.TDocSystemInfoExample" resultType="java.lang.Integer" >
+    select count(*) from t_doc_system_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByPrimaryKeySelective" parameterType="com.swagger.idoc.po.TDocSystemInfo" >
+    update t_doc_system_info
+    <set >
+      <if test="appname != null" >
+        appname = #{appname,jdbcType=TIMESTAMP},
+      </if>
+      <if test="requesturl != null" >
+        requestUrl = #{requesturl,jdbcType=TIMESTAMP},
+      </if>
+      <if test="errorcode != null" >
+        errorcode = #{errorcode,jdbcType=BIT},
+      </if>
+      <if test="publisher != null" >
+        publisher = #{publisher,jdbcType=VARCHAR},
+      </if>
+      <if test="titile != null" >
+        titile = #{titile,jdbcType=VARCHAR},
+      </if>
+      <if test="cancelTime != null" >
+        cancel_time = #{cancelTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.swagger.idoc.po.TDocSystemInfo" >
+    update t_doc_system_info
+    set appname = #{appname,jdbcType=TIMESTAMP},
+      requestUrl = #{requesturl,jdbcType=TIMESTAMP},
+      errorcode = #{errorcode,jdbcType=BIT},
+      publisher = #{publisher,jdbcType=VARCHAR},
+      titile = #{titile,jdbcType=VARCHAR},
+      cancel_time = #{cancelTime,jdbcType=TIMESTAMP},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.swagger.idoc.po.TDocSystemInfo" >
+    update t_doc_system_info
+    set appname = #{appname,jdbcType=TIMESTAMP},
+      requestUrl = #{requesturl,jdbcType=TIMESTAMP},
+      errorcode = #{errorcode,jdbcType=BIT},
+      publisher = #{publisher,jdbcType=VARCHAR},
+      titile = #{titile,jdbcType=VARCHAR},
+      cancel_time = #{cancelTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

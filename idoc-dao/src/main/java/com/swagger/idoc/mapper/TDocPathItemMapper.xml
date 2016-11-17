@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.swagger.idoc.mapper.TDocPathItemMapper" >
+  <resultMap id="BaseResultMap" type="com.swagger.idoc.po.TDocPathItem" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="path_id" property="pathId" jdbcType="INTEGER" />
+    <result column="protocol" property="protocol" jdbcType="VARCHAR" />
+    <result column="tag_ids" property="tagIds" jdbcType="VARCHAR" />
+    <result column="summary" property="summary" jdbcType="VARCHAR" />
+    <result column="operation" property="operation" jdbcType="VARCHAR" />
+    <result column="consumes" property="consumes" jdbcType="VARCHAR" />
+    <result column="produces" property="produces" jdbcType="VARCHAR" />
+    <result column="app_protocol" property="appProtocol" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="inter_code" property="interCode" jdbcType="VARCHAR" />
+    <result column="if_valid" property="ifValid" jdbcType="TINYINT" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.swagger.idoc.po.TDocPathItem" extends="BaseResultMap" >
+    <result column="description" property="description" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, path_id, protocol, tag_ids, summary, operation, consumes, produces, app_protocol, 
+    create_time, update_time, inter_code, if_valid
+  </sql>
+  <sql id="Blob_Column_List" >
+    description
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.swagger.idoc.po.TDocPathItemExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_doc_path_item
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.swagger.idoc.po.TDocPathItemExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_doc_path_item
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_doc_path_item
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_doc_path_item
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.swagger.idoc.po.TDocPathItem" >
+    insert into t_doc_path_item (id, path_id, protocol, 
+      tag_ids, summary, operation, 
+      consumes, produces, app_protocol, 
+      create_time, update_time, inter_code, 
+      if_valid, description)
+    values (#{id,jdbcType=INTEGER}, #{pathId,jdbcType=INTEGER}, #{protocol,jdbcType=VARCHAR}, 
+      #{tagIds,jdbcType=VARCHAR}, #{summary,jdbcType=VARCHAR}, #{operation,jdbcType=VARCHAR}, 
+      #{consumes,jdbcType=VARCHAR}, #{produces,jdbcType=VARCHAR}, #{appProtocol,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{interCode,jdbcType=VARCHAR}, 
+      #{ifValid,jdbcType=TINYINT}, #{description,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.swagger.idoc.po.TDocPathItem" >
+    insert into t_doc_path_item
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="pathId != null" >
+        path_id,
+      </if>
+      <if test="protocol != null" >
+        protocol,
+      </if>
+      <if test="tagIds != null" >
+        tag_ids,
+      </if>
+      <if test="summary != null" >
+        summary,
+      </if>
+      <if test="operation != null" >
+        operation,
+      </if>
+      <if test="consumes != null" >
+        consumes,
+      </if>
+      <if test="produces != null" >
+        produces,
+      </if>
+      <if test="appProtocol != null" >
+        app_protocol,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="interCode != null" >
+        inter_code,
+      </if>
+      <if test="ifValid != null" >
+        if_valid,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="pathId != null" >
+        #{pathId,jdbcType=INTEGER},
+      </if>
+      <if test="protocol != null" >
+        #{protocol,jdbcType=VARCHAR},
+      </if>
+      <if test="tagIds != null" >
+        #{tagIds,jdbcType=VARCHAR},
+      </if>
+      <if test="summary != null" >
+        #{summary,jdbcType=VARCHAR},
+      </if>
+      <if test="operation != null" >
+        #{operation,jdbcType=VARCHAR},
+      </if>
+      <if test="consumes != null" >
+        #{consumes,jdbcType=VARCHAR},
+      </if>
+      <if test="produces != null" >
+        #{produces,jdbcType=VARCHAR},
+      </if>
+      <if test="appProtocol != null" >
+        #{appProtocol,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="interCode != null" >
+        #{interCode,jdbcType=VARCHAR},
+      </if>
+      <if test="ifValid != null" >
+        #{ifValid,jdbcType=TINYINT},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.swagger.idoc.po.TDocPathItemExample" resultType="java.lang.Integer" >
+    select count(*) from t_doc_path_item
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByPrimaryKeySelective" parameterType="com.swagger.idoc.po.TDocPathItem" >
+    update t_doc_path_item
+    <set >
+      <if test="pathId != null" >
+        path_id = #{pathId,jdbcType=INTEGER},
+      </if>
+      <if test="protocol != null" >
+        protocol = #{protocol,jdbcType=VARCHAR},
+      </if>
+      <if test="tagIds != null" >
+        tag_ids = #{tagIds,jdbcType=VARCHAR},
+      </if>
+      <if test="summary != null" >
+        summary = #{summary,jdbcType=VARCHAR},
+      </if>
+      <if test="operation != null" >
+        operation = #{operation,jdbcType=VARCHAR},
+      </if>
+      <if test="consumes != null" >
+        consumes = #{consumes,jdbcType=VARCHAR},
+      </if>
+      <if test="produces != null" >
+        produces = #{produces,jdbcType=VARCHAR},
+      </if>
+      <if test="appProtocol != null" >
+        app_protocol = #{appProtocol,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="interCode != null" >
+        inter_code = #{interCode,jdbcType=VARCHAR},
+      </if>
+      <if test="ifValid != null" >
+        if_valid = #{ifValid,jdbcType=TINYINT},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.swagger.idoc.po.TDocPathItem" >
+    update t_doc_path_item
+    set path_id = #{pathId,jdbcType=INTEGER},
+      protocol = #{protocol,jdbcType=VARCHAR},
+      tag_ids = #{tagIds,jdbcType=VARCHAR},
+      summary = #{summary,jdbcType=VARCHAR},
+      operation = #{operation,jdbcType=VARCHAR},
+      consumes = #{consumes,jdbcType=VARCHAR},
+      produces = #{produces,jdbcType=VARCHAR},
+      app_protocol = #{appProtocol,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      inter_code = #{interCode,jdbcType=VARCHAR},
+      if_valid = #{ifValid,jdbcType=TINYINT},
+      description = #{description,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.swagger.idoc.po.TDocPathItem" >
+    update t_doc_path_item
+    set path_id = #{pathId,jdbcType=INTEGER},
+      protocol = #{protocol,jdbcType=VARCHAR},
+      tag_ids = #{tagIds,jdbcType=VARCHAR},
+      summary = #{summary,jdbcType=VARCHAR},
+      operation = #{operation,jdbcType=VARCHAR},
+      consumes = #{consumes,jdbcType=VARCHAR},
+      produces = #{produces,jdbcType=VARCHAR},
+      app_protocol = #{appProtocol,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      inter_code = #{interCode,jdbcType=VARCHAR},
+      if_valid = #{ifValid,jdbcType=TINYINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

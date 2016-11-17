@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/../idoc-common/idoc-common.iml" filepath="$PROJECT_DIR$/../idoc-common/idoc-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/idoc-dao/idoc-dao.iml" filepath="$PROJECT_DIR$/idoc-dao/idoc-dao.iml" />
+      <module fileurl="file://$PROJECT_DIR$/idoc-main.iml" filepath="$PROJECT_DIR$/idoc-main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/idoc-parent/idoc-parent.iml" filepath="$PROJECT_DIR$/idoc-parent/idoc-parent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/idoc-pojo/idoc-pojo.iml" filepath="$PROJECT_DIR$/idoc-pojo/idoc-pojo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../idoc-rest/idoc-rest.iml" filepath="$PROJECT_DIR$/../idoc-rest/idoc-rest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/idoc-service/idoc-service.iml" filepath="$PROJECT_DIR$/idoc-service/idoc-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../idoc-sso/idoc-sso.iml" filepath="$PROJECT_DIR$/../idoc-sso/idoc-sso.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../idoc-web/idoc-web.iml" filepath="$PROJECT_DIR$/../idoc-web/idoc-web.iml" />
+    </modules>
+  </component>
+</project>
