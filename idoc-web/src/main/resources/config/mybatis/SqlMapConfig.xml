@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+
+<configuration>
+
+    <!--全局setting配置， 根据需要添加-->
+    <typeAliases>
+<!--
+        <typeAlias type="com.springapp.mvc.User" alias="User"/>
+-->
+        <!--指定包名，mybatis自动扫描其中的po类 进行批量别名-->
+       <package name="com.swagger.idoc.po"/>
+    </typeAliases>
+
+  <!--  <mappers>
+        &lt;!&ndash;<mapper resource="com/idoc/swagger/mapper/T_docMapper.xml"/>&ndash;&gt;
+        &lt;!&ndash; 批量扫描所指定包下的所有mapper接口进行加载用于代理方法开发Dao&ndash;&gt;
+      &lt;!&ndash;  <package name="com.idoc.swagger.mapper"/>&ndash;&gt;
+    </mappers>-->
+</configuration>
