@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+                        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
+
+    <!--  使用 mvc:annotation-driven 代替注解映射器和注解适配器配置 其默认加载了很多的参数绑定方法
+      比如json转换解析器 jackjson就默认加载了-->
+    <mvc:annotation-driven></mvc:annotation-driven>
+    <!-- 对web包中的所有类进行扫描，以完成Bean创建和自动依赖注入的功能 -->
+    <!-- 先扫描controller 后service -->
+    <context:component-scan base-package="com.idoc.rest.controller">
+        <!-- <context:include-filter type="annotation"
+                                 expression="org.springframework.stereotype.Controller" />
+         <context:exclude-filter type="annotation"
+                                 expression="org.springframework.stereotype.Service" />-->
+    </context:component-scan>
+
+    <!-- 用于将对象转换为 JSON  -->
+    <bean id="stringConverter"
+          class="org.springframework.http.converter.StringHttpMessageConverter">
+        <property name="supportedMediaTypes">
+            <list>
+                <value>text/plain;charset=UTF-8</value>
+            </list>
+        </property>
+    </bean>
+    <bean id="jsonConverter"
+          class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"></bean>
+    <bean
+            class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+        <property name="messageConverters">
+            <list>
+                <ref bean="stringConverter" />
+                <ref bean="jsonConverter" />
+            </list>
+        </property>
+    </bean>
+    <!-- jaskson 用于前后台以json形式的数据交换,设置编码集为utf-8编码-->
+   <!-- <bean id="mappingJacksonHttpMessageConverter"
+          class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+        <property name="supportedMediaTypes">
+            <list>
+                <value>application/json;charset=UTF-8</value>
+            </list>
+        </property>
+    </bean>
+       使注解生效
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+        <property name="messageConverters">
+            <list >
+                <ref bean="mappingJacksonHttpMessageConverter" />
+            </list>
+        </property>
+    </bean>
+
+    -->
+
+
+    <!-- SpringMVC 异常处理机制 error页面可以通过Exception e = (Exception)request.getAttribute("exception")获得异常信息-->
+    <!--  <bean id="exceptionResolver"
+            class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+          <property name="exceptionMappings">
+              <props>
+                  <prop key="java.lang.Exception">common/error</prop>
+                  <prop key="java.lang.Throwable">common/error</prop>
+              </props>
+          </property>
+          <property name="statusCodes">
+              <props>
+                  <prop key="errors/500">500</prop>
+                  <prop key="errors/404">404</prop>
+              </props>
+          </property>
+          &lt;!&ndash; 设置日志输出级别，不定义则默认不输出警告等错误日志信息 &ndash;&gt;
+          <property name="warnLogCategory" value="WARN"></property>
+          &lt;!&ndash; 默认错误页面，当找不到上面mappings中指定的异常对应视图时，使用本默认配置 &ndash;&gt;
+          <property name="defaultErrorView" value="../error"></property>
+          &lt;!&ndash; 默认HTTP状态码 &ndash;&gt;
+          <property name="defaultStatusCode" value="500"></property>
+
+      </bean>-->
+    <!-- 访问静态资源文件  -->
+    <!--<mvc:resources mapping="/images/**" location="/images/" cache-period="31556926"/>-->
+    <!-- 对静态资源文件的访问  方案一 （二选一）
+        会把"/**" url,注册到SimpleUrlHandlerMapping的urlMap中,把对静态资源的访问由HandlerMapping转到
+        org.springframework.web.servlet.resource.DefaultServletHttpRequestHandler处理并返回.
+        DefaultServletHttpRequestHandler使用就是各个Servlet容器自己的默认Servlet.
+        <mvc:default-servlet-handler/> -->
+
+    <!-- 对静态资源文件的访问  方案二 （二选一）/images/**映射到ResourceHttpRequestHandler进行处理，
+    location指定静态资源的位置.可以是web application根目录下、jar包里面，这样可以把静态资源压缩到jar包中。
+    cache-period 可以使得静态资源进行web cache
+    <mvc:resources mapping="/images/**" location="/images/" cache-period="31556926"/>
+    <mvc:resources mapping="/js/**" location="/js/" cache-period="31556926"/>
+    <mvc:resources mapping="/css/**" location="/css/" cache-period="31556926"/>-->
+</beans>

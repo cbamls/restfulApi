@@ -11,7 +11,7 @@
     <mvc:annotation-driven></mvc:annotation-driven>
     <!-- 对web包中的所有类进行扫描，以完成Bean创建和自动依赖注入的功能 -->
     <!-- 先扫描controller 后service -->
-    <context:component-scan base-package="com.swagger.idoc.controller">
+    <context:component-scan base-package="com.idoc.controller">
         <!-- <context:include-filter type="annotation"
                                  expression="org.springframework.stereotype.Controller" />
          <context:exclude-filter type="annotation"
@@ -30,14 +30,6 @@
         <property name="maxInMemorySize" value="40960" />
     </bean>
 
-    <!-- 使注解生效   -->
-    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
-        <property name="messageConverters">
-            <list >
-                <ref bean="mappingJacksonHttpMessageConverter" />
-            </list>
-        </property>
-    </bean>
 
     <!--
         springmvc的配置文件，它的命名规则：web.xml里springmvc模块的名称+“-servlet.xml”
@@ -52,9 +44,28 @@
         <!--配置jsp路径的后缀-->
         <property name="suffix" value=".jsp"></property>
     </bean>
-
+    <!-- 用于将对象转换为 JSON  -->
+    <bean id="stringConverter"
+          class="org.springframework.http.converter.StringHttpMessageConverter">
+        <property name="supportedMediaTypes">
+            <list>
+                <value>text/plain;charset=UTF-8</value>
+            </list>
+        </property>
+    </bean>
+    <bean id="jsonConverter"
+          class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"></bean>
+    <bean
+            class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+        <property name="messageConverters">
+            <list>
+                <ref bean="stringConverter" />
+                <ref bean="jsonConverter" />
+            </list>
+        </property>
+    </bean>
     <!-- jaskson 用于前后台以json形式的数据交换,设置编码集为utf-8编码-->
-    <bean id="mappingJacksonHttpMessageConverter"
+   <!-- <bean id="mappingJacksonHttpMessageConverter"
           class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
         <property name="supportedMediaTypes">
             <list>
@@ -62,6 +73,16 @@
             </list>
         </property>
     </bean>
+       使注解生效
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+        <property name="messageConverters">
+            <list >
+                <ref bean="mappingJacksonHttpMessageConverter" />
+            </list>
+        </property>
+    </bean>
+
+    -->
 
 
     <!-- SpringMVC 异常处理机制 error页面可以通过Exception e = (Exception)request.getAttribute("exception")获得异常信息-->

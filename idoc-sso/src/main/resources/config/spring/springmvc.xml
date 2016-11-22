@@ -11,57 +11,13 @@
     <mvc:annotation-driven></mvc:annotation-driven>
     <!-- 对web包中的所有类进行扫描，以完成Bean创建和自动依赖注入的功能 -->
     <!-- 先扫描controller 后service -->
-    <context:component-scan base-package="com.idoc.swagger.controller">
+    <context:component-scan base-package="com.idoc.sso.controller">
         <!-- <context:include-filter type="annotation"
                                  expression="org.springframework.stereotype.Controller" />
          <context:exclude-filter type="annotation"
                                  expression="org.springframework.stereotype.Service" />-->
     </context:component-scan>
 
-    <!-- 配置文件上传，如果没有使用文件上传可以不用配置，当然如果不配，那么配置文件中也不必引入上传组件包 -->
-
-    <bean id="multipartResolver"
-
-          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-
-        <!-- 默认编码 -->
-
-        <property name="defaultEncoding" value="utf-8" />
-
-        <!-- 文件大小最大值 -->
-
-        <property name="maxUploadSize" value="10485760000" />
-
-        <!-- 内存中的最大值 -->
-
-        <property name="maxInMemorySize" value="40960" />
-
-    </bean>
-    <!-- 使注解生效   -->
-    <bean
-            class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
-        <property name="messageConverters">
-            <list>
-                <ref bean="mappingJacksonHttpMessageConverter" />
-                <bean class = "org.springframework.http.converter.StringHttpMessageConverter">
-                    <property name = "supportedMediaTypes">
-                        <list>
-                            <bean class="org.springframework.http.MediaType">
-                                <constructor-arg index="0" value="text"/>
-                                <constructor-arg index="1" value="plain"/>
-                                <constructor-arg index="2" value="UTF-8"/>
-                            </bean>
-                            <bean class="org.springframework.http.MediaType">
-                                <constructor-arg index="0" value="*"/>
-                                <constructor-arg index="1" value="*"/>
-                                <constructor-arg index="2" value="UTF-8"/>
-                            </bean>
-                        </list>
-                    </property>
-                </bean>
-            </list>
-        </property>
-    </bean>
     <!--
         springmvc的配置文件，它的命名规则：web.xml里springmvc模块的名称+“-servlet.xml”
         对模型视图名称的解析，即在模型视图名称添加前后缀 例如：Controller里返回一个名为test的逻辑视图名称，根据配置文件，
@@ -75,17 +31,41 @@
         <!--配置jsp路径的后缀-->
         <property name="suffix" value=".jsp"></property>
     </bean>
+    <!-- 用于将对象转换为 JSON  -->
+    <bean id="stringConverter"
+          class="org.springframework.http.converter.StringHttpMessageConverter">
+        <property name="supportedMediaTypes">
+            <list>
+                <value>text/plain;charset=UTF-8</value>
+            </list>
+        </property>
+    </bean>
+    <bean id="jsonConverter"
+          class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"></bean>
+    <bean
+            class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
 
+    <!--
+            class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+-->
+        <property name="messageConverters">
+            <list>
+                <ref bean="stringConverter" />
+                <ref bean="jsonConverter" />
+            </list>
+        </property>
+    </bean>
     <!-- jaskson 用于前后台以json形式的数据交换,设置编码集为utf-8编码-->
-    <bean id="mappingJacksonHttpMessageConverter"
+    <!--<bean id="mappingJacksonHttpMessageConverter"
           class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
         <property name="supportedMediaTypes">
             <list>
                 <value>application/json;charset=UTF-8</value>
             </list>
         </property>
-    </bean>
-
+    </bean>-->
+    <!-- 引入同文件夹下的redis属性配置文件 -->
+    <import resource="redis-config.xml"/>
 
     <!-- SpringMVC 异常处理机制 error页面可以通过Exception e = (Exception)request.getAttribute("exception")获得异常信息-->
     <!--  <bean id="exceptionResolver"

@@ -28,8 +28,8 @@
       <!--  &lt;!&ndash; 自动扫描mapping.xml文件 &ndash;&gt;
         <property name="mapperLocations" value="classpath:com/swagger/idoc/mapper/*.xml"></property>-->
     </bean>
-    <!-- hibernate 工厂类 -->
-    <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+    <!-- hibernate 工厂类 暂时不整合hibernate-->
+    <!--<bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
         <property name="dataSource">
             <ref bean="dataSource" />
         </property>
@@ -48,7 +48,7 @@
                 <prop key="hibernate.current_session_context_class">org.springframework.orm.hibernate4.SpringSessionContext</prop>
             </props>
         </property>
-    </bean>
+    </bean>-->
 
     <!--mapper配置
        MapperFactoryBean: 根据mapper接口生成代理对象
@@ -66,7 +66,7 @@
      -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <!-- 指定扫描的 包名 如果需要扫描多个包，中间用半角逗号隔开-->
-        <property name="basePackage" value="com.swagger.idoc.mapper"/>
+        <property name="basePackage" value="com.idoc.dao.mapper"/>
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
     </bean>
 </beans>

@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="idoc-sso:war">
+    <output-path>$PROJECT_DIR$/../idoc-sso/target</output-path>
+    <root id="archive" name="idoc-sso-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="idoc-sso:war exploded" />
+    </root>
+  </artifact>
+</component>

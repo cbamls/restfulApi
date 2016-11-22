@@ -3,7 +3,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>idoc</artifactId>
+        <artifactId>idoc-parent</artifactId>
         <groupId>com.swagger.idoc</groupId>
         <version>1.0-SNAPSHOT</version>
         <relativePath>../idoc-parent/pom.xml</relativePath>
@@ -12,11 +12,6 @@
 
     <artifactId>idoc-dao</artifactId>
     <dependencies>
-        <dependency>
-            <groupId>com.swagger.idoc</groupId>
-            <artifactId>idoc-pojo</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
 
         <!-- 阿里巴巴数据源包 -->
         <dependency>
@@ -46,24 +41,10 @@
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
         <!-- mysql connector end-->
-
-        <!-- hibernate需要的jar包 -->
         <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-validator</artifactId>
+            <groupId>com.swagger.idoc</groupId>
+            <artifactId>idoc-pojo</artifactId>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
-
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-core</artifactId>
-            <type>jar</type>
-        </dependency>
-
-        <!-- hibernate ehcache需要的jar包 -->
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-ehcache</artifactId>
-        </dependency>
-
     </dependencies>
 </project>

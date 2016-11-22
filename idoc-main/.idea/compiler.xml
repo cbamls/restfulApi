@@ -32,15 +32,15 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="idoc-common" target="1.6" />
-      <module name="idoc-dao" target="1.6" />
+      <module name="idoc-common" target="1.7" />
+      <module name="idoc-dao" target="1.7" />
       <module name="idoc-main" target="1.5" />
       <module name="idoc-parent" target="1.5" />
-      <module name="idoc-pojo" target="1.6" />
-      <module name="idoc-rest" target="1.6" />
-      <module name="idoc-service" target="1.6" />
-      <module name="idoc-sso" target="1.6" />
-      <module name="idoc-web" target="1.6" />
+      <module name="idoc-pojo" target="1.7" />
+      <module name="idoc-rest" target="1.7" />
+      <module name="idoc-service" target="1.7" />
+      <module name="idoc-sso" target="1.7" />
+      <module name="idoc-web" target="1.7" />
     </bytecodeTargetLevel>
   </component>
 </project>

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+		  http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+         version="3.0">
+
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+    <!-- spring 过滤器统一设置编码 -->
+    <filter>
+        <filter-name>Spring character encoding filter</filter-name>
+        <filter-class>
+            org.springframework.web.filter.CharacterEncodingFilter
+        </filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+        <init-param>
+            <param-name>forceEncoding</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>Spring character encoding filter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <context-param>
+        <param-name>log4jConfigLocation</param-name>
+        <param-value>classpath:log4j.xml</param-value>
+    </context-param>
+    <context-param>
+        <param-name>loggingLevel</param-name>
+        <param-value>debug</param-value>
+    </context-param>
+    <!-- Web 项目 Spring 加载 Log4j 的监听 -->
+    <listener>
+        <listener-class>
+            org.springframework.web.util.Log4jConfigListener
+        </listener-class>
+    </listener>
+    <!-- 指定Spring Bean的配置文件所在目录。默认配置在WEB-INF目录下 -->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath:config/spring/applicationContext-*.xml</param-value>
+    </context-param>
+    <!-- spring 应用上下文监听器 主要初始化注入 -->
+    <!-- Spring会创建一个WebApplicationContext上下文，称为父上下文（父容器） ，保存在 ServletContext中，key是WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE的值。
+	可以使用Spring提供的工具类取出上下文对象：WebApplicationContextUtils.getWebApplicationContext(ServletContext);
+
+	DispatcherServlet是一个Servlet,可以同时配置多个，每个 DispatcherServlet有一个自己的上下文对象（WebApplicationContext），称为子上下文（子容器），子上下文可以访问父上下文中的内容，
+	但父上下文不能访问子上下文中的内容。 它也保存在 ServletContext中，key是"org.springframework.web.servlet.FrameworkServlet.CONTEXT"+Servlet名称。当一个Request对象产生时，
+	会把这个子上下文对象（WebApplicationContext）保存在Request对象中，key是DispatcherServlet.class.getName() + ".CONTEXT"。
+	可以使用工具类取出上下文对象：RequestContextUtils.getWebApplicationContext(request);-->
+    <listener>
+        <listener-class>
+            org.springframework.web.context.ContextLoaderListener
+        </listener-class>
+    </listener>
+
+    <!--  Servlet模块同时会加载{servletname}-servlet.xml文件 SpringMVC前值控制模式基础selvlet -->
+    <servlet>
+        <servlet-name>idoc-rest</servlet-name>
+        <servlet-class>
+            org.springframework.web.servlet.DispatcherServlet
+        </servlet-class>
+
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>classpath:config/spring/springmvc.xml</param-value>
+        </init-param>
+
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>idoc-rest</servlet-name>
+        <url-pattern>/</url-pattern><!-- 是拦截以.do结尾的请求，可自定义 -->
+        <!--拦截/*，这是一个错误的方式，请求可以走到Action中，但转到jsp时再次被拦截，不能访问到jsp。
+			拦截/，restful风格 弊端：会导致静态文件（jpg,js,css）被拦截后不能正常显示。解决办法看dispatcher-->
+    </servlet-mapping>
+
+    <!-- 如果不定义webAppRootKey参数，那么webAppRootKey就是缺省的"webapp.root"。
+        但最好设置，以免项目之间的名称冲突。 定义以后，在Web Container启动时将把ROOT的绝对路径写到系统变量里。
+        然后log4j的配置文件里就可以用${ myapp.root }来表示Web目录的绝对路径，把log文件存放于webapp中。
+        此参数用于后面的“Log4jConfigListener” -->
+    <context-param>
+        <param-name>webAppRootKey</param-name>
+        <param-value>myapp.root</param-value>
+    </context-param>
+
+
+    <session-config>
+        <session-timeout>15</session-timeout>
+    </session-config>
+
+
+    <error-page>
+        <error-code>404</error-code>
+        <location>/WEB-INF/common/404.jsp</location>
+    </error-page>
+
+    <error-page>
+        <exception-type>java.lang.Exception</exception-type>
+        <location>/WEB-INF/common/exception.jsp</location>
+    </error-page>
+
+</web-app>

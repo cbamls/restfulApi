@@ -5,13 +5,24 @@
     <modelVersion>4.0.0</modelVersion>
     <packaging>pom</packaging>
     <groupId>com.swagger.idoc</groupId>
-    <artifactId>idoc</artifactId>
+    <artifactId>idoc-parent</artifactId>
     <version>1.0-SNAPSHOT</version>
     <properties>
-        <!-- log4j日志文件管理包版本 -->
+        <httpclient.version>4.3.5</httpclient.version>
+        <commons-lang3.version>3.3.2</commons-lang3.version>
+        <commons-io.version>1.3.2</commons-io.version>
+        <commons-net.version>3.3</commons-net.version>
         <jackson.version>2.8.1</jackson.version>
-        <!--spring版本-->
-        <spring.version>3.2.4.RELEASE</spring.version>
+        <spring.version>4.3.3.RELEASE</spring.version>
+        <mybatis.connector.version>5.1.34</mybatis.connector.version>
+        <log4j.version>1.2.17</log4j.version>
+        <druid.version>1.0.2</druid.version>
+        <jstl.version>1.2</jstl.version>
+        <fileupload.version>1.2.1</fileupload.version>
+        <junit.version>4.11</junit.version>
+        <mybatis.spring.version>1.2.2</mybatis.spring.version>
+        <slf4j.version>1.7.5</slf4j.version>
+        <commons-logging.version>1.1.3</commons-logging.version>
     </properties>
 
     <repositories>
@@ -30,7 +41,47 @@
     </repositories>
 
     <dependencyManagement>
+
         <dependencies>
+            <!-- https://mvnrepository.com/artifact/commons-logging/commons-logging -->
+            <dependency>
+                <groupId>commons-logging</groupId>
+                <artifactId>commons-logging</artifactId>
+                <version>${commons-logging.version}</version>
+            </dependency>
+            <!-- httpclient -->
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpclient</artifactId>
+                <version>${httpclient.version}</version>
+            </dependency>
+            <!-- Apache工具组件 -->
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${commons-lang3.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>${commons-io.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-net</groupId>
+                <artifactId>commons-net</artifactId>
+                <version>${commons-net.version}</version>
+            </dependency>
+            <!-- config redis data and client jar-->
+            <dependency>
+                <groupId>org.springframework.data</groupId>
+                <artifactId>spring-data-redis</artifactId>
+                <version>1.0.2.RELEASE</version>
+            </dependency>
+            <dependency>
+                <groupId>redis.clients</groupId>
+                <artifactId>jedis</artifactId>
+                <version>2.1.0</version>
+            </dependency>
             <!-- spring需要的jar包 -->
             <dependency>
                 <groupId>org.springframework</groupId>
@@ -112,7 +163,7 @@
             <dependency>
                 <groupId>mysql</groupId>
                 <artifactId>mysql-connector-java</artifactId>
-                <version>5.1.34</version>
+                <version>${mybatis.connector.version}</version>
             </dependency>
 
             <!-- dbcp连接池需要的jar包 -->
@@ -126,27 +177,21 @@
             <dependency>
                 <groupId>jstl</groupId>
                 <artifactId>jstl</artifactId>
-                <version>1.2</version>
+                <version>${jstl.version}</version>
             </dependency>
 
             <!-- log4j需要的jar包 -->
             <dependency>
                 <groupId>log4j</groupId>
                 <artifactId>log4j</artifactId>
-                <version>1.2.17</version>
+                <version>${log4j.version}</version>
             </dependency>
 
             <!-- 文件上传需要的jar包 -->
             <dependency>
                 <groupId>commons-fileupload</groupId>
                 <artifactId>commons-fileupload</artifactId>
-                <version>1.2.1</version>
-            </dependency>
-
-            <dependency>
-                <groupId>commons-io</groupId>
-                <artifactId>commons-io</artifactId>
-                <version>1.4</version>
+                <version>${fileupload.version}</version>
             </dependency>
 
             <!-- 单元测试需要的jar包 -->
@@ -154,7 +199,7 @@
             <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
-                <version>4.11</version>
+                <version>${junit.version}</version>
             </dependency>
 
             <dependency>
@@ -185,7 +230,7 @@
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>druid</artifactId>
-                <version>1.0.2</version>
+                <version>${druid.version}</version>
             </dependency>
             <!-- mybatis start-->
             <dependency>
@@ -197,7 +242,7 @@
             <dependency>
                 <groupId>org.mybatis</groupId>
                 <artifactId>mybatis-spring</artifactId>
-                <version>1.2.2</version>
+                <version>${mybatis.spring.version}</version>
             </dependency>
             <!-- mybatis end-->
 
@@ -224,8 +269,23 @@
             <dependency>
                 <groupId>org.slf4j</groupId>
                 <artifactId>slf4j-log4j12</artifactId>
-                <version>1.7.5</version>
-                <scope>provided</scope>
+                <version>${slf4j.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${slf4j.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-nop</artifactId>
+                <version>${slf4j.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>jcl-over-slf4j</artifactId>
+                <version>${slf4j.version}</version>
+                <scope>runtime</scope>
             </dependency>
             <!-- 无损压缩 第三方jar包-->
             <dependency>
@@ -251,8 +311,8 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
                     <configuration>
-                        <source>1.6</source>
-                        <target>1.6</target>
+                        <source>1.7</source>
+                        <target>1.7</target>
                     </configuration>
                 </plugin>
             </plugins>

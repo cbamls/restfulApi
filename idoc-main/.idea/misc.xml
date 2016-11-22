@@ -5,6 +5,8 @@
   </component>
   <component name="FrameworkDetectionExcludesConfiguration">
     <file type="web" url="file://$PROJECT_DIR$/idoc-web" />
+    <file type="web" url="file://$PROJECT_DIR$/../idoc-rest" />
+    <file type="web" url="file://$PROJECT_DIR$/../idoc-sso" />
     <file type="web" url="file://$PROJECT_DIR$/../idoc-web" />
   </component>
   <component name="MavenProjectsManager">
@@ -13,6 +15,7 @@
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/idoc-parent/pom.xml" />
         <option value="$PROJECT_DIR$/../idoc-rest/pom.xml" />
+        <option value="$PROJECT_DIR$/../idoc-common/pom.xml" />
       </list>
     </option>
   </component>
