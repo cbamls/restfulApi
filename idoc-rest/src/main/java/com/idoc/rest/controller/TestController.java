@@ -7,6 +7,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.HashMap;
+import java.util.List;
+
 /**
  * CopyRright (c)2014-2016 Haerbin Hearglobal Co.,Ltd
  * Project: idoc-main
@@ -23,10 +26,11 @@ public class TestController {
     private GetDocInfoByIdService getDocInfoByIdService;
     @ResponseBody
     @RequestMapping("/find")
-    public TDocInfo getDocInfoById() {
-        TDocInfo tDocInfo = getDocInfoByIdService.getDocInfoById();
+    public List getDocInfoById() {
+        List<TDocInfo> list = getDocInfoByIdService.getDocMapByPageHelper();
+        //HashMap map = getDocInfoByIdService.getDocMap();
       /*  Logger logger = Logger.getLogger(TestController.class);
         logger.debug("cbamcbam");*/
-        return tDocInfo;
+        return list;
     }
 }

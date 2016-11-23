@@ -37,6 +37,8 @@
           <element id="archive" name="idoc-dao-1.0-SNAPSHOT.jar">
             <element id="module-output" name="idoc-dao" />
           </element>
+          <element id="library" level="project" name="Maven: tk.mybatis:mapper:3.3.9" />
+          <element id="library" level="project" name="Maven: javax.persistence:persistence-api:1.0" />
           <element id="library" level="project" name="Maven: com.alibaba:druid:1.0.2" />
           <element id="library" level="project" name="Maven: commons-dbcp:commons-dbcp:1.4" />
           <element id="library" level="project" name="Maven: commons-pool:commons-pool:1.6" />

@@ -2,10 +2,14 @@ package com.idoc.dao.mapper;
 
 import com.swagger.idoc.po.TDocInfo;
 import com.swagger.idoc.po.TDocInfoExample;
+import tk.mybatis.mapper.common.Mapper;
+
+import java.util.HashMap;
 import java.util.List;
 
-public interface TDocInfoMapper {
-    int countByExample(TDocInfoExample example);
+public interface TDocInfoMapper extends Mapper<TDocInfo> {
+    //HashMap getDocInfoById(Integer id);
+ /*   int countByExample(TDocInfoExample example);
 
     int deleteByPrimaryKey(Integer id);
 
@@ -23,5 +27,5 @@ public interface TDocInfoMapper {
 
     int updateByPrimaryKeyWithBLOBs(TDocInfo record);
 
-    int updateByPrimaryKey(TDocInfo record);
+    int updateByPrimaryKey(TDocInfo record);*/
 }

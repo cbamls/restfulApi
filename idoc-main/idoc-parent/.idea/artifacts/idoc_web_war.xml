@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="idoc-web:war">
+    <output-path>$PROJECT_DIR$/../../idoc-web/target</output-path>
+    <root id="archive" name="idoc-web.war">
+      <element id="artifact" artifact-name="idoc-web:war exploded" />
+    </root>
+  </artifact>
+</component>

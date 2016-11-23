@@ -1,9 +1,14 @@
 package com.idoc.rest.service.impl;
+import com.github.pagehelper.PageHelper;
 import com.idoc.dao.mapper.TDocInfoMapper;
 import com.swagger.idoc.po.TDocInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.idoc.rest.service.GetDocInfoByIdService;
+
+import java.util.HashMap;
+import java.util.List;
+
 /**
  * CopyRright (c)2014-2016 Haerbin Hearglobal Co.,Ltd
  * Project: idoc-main
@@ -19,8 +24,13 @@ public class GetDocInfoByIdImpl implements GetDocInfoByIdService {
     @Autowired
     private TDocInfoMapper tDocInfoMapper;
     @Override
-    public TDocInfo getDocInfoById() {
-        TDocInfo tDocInfo = tDocInfoMapper.selectByPrimaryKey(1);
-        return tDocInfo;
+    public List getDocInfoById() {
+        List<TDocInfo> list = tDocInfoMapper.selectAll();
+        return list;
+    }
+    public List getDocMapByPageHelper() {
+        PageHelper.startPage(1, 10);
+       List<TDocInfo> list = tDocInfoMapper.selectAll();
+        return list;
     }
 }

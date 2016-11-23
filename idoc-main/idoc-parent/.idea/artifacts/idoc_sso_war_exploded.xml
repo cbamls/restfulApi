@@ -1,0 +1,58 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="idoc-sso:war exploded">
+    <output-path>$PROJECT_DIR$/../../idoc-sso/target/idoc-sso</output-path>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="idoc-sso" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: org.slf4j:slf4j-log4j12:1.7.5" />
+          <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.7.5" />
+          <element id="library" level="project" name="Maven: org.slf4j:jcl-over-slf4j:1.7.5" />
+          <element id="library" level="project" name="Maven: log4j:log4j:1.2.17" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-context:4.3.3.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-aop:4.3.3.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-expression:4.3.3.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-aspects:4.3.3.RELEASE" />
+          <element id="library" level="project" name="Maven: org.aspectj:aspectjweaver:1.8.9" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-context-support:4.3.3.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-core:4.3.3.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-beans:4.3.3.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-webmvc:4.3.3.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-web:4.3.3.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-orm:4.3.3.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-jdbc:4.3.3.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-tx:4.3.3.RELEASE" />
+          <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.8.1" />
+          <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.8.1" />
+          <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-core:2.8.1" />
+          <element id="library" level="project" name="Maven: org.codehaus.jackson:jackson-mapper-asl:1.9.4" />
+          <element id="library" level="project" name="Maven: org.codehaus.jackson:jackson-core-asl:1.9.4" />
+          <element id="library" level="project" name="Maven: org.springframework.data:spring-data-redis:1.0.2.RELEASE" />
+          <element id="library" level="project" name="Maven: redis.clients:jedis:2.1.0" />
+          <element id="library" level="project" name="Maven: commons-pool:commons-pool:1.6" />
+          <element id="archive" name="idoc-dao-1.0-SNAPSHOT.jar">
+            <element id="module-output" name="idoc-dao" />
+          </element>
+          <element id="library" level="project" name="Maven: com.github.pagehelper:pagehelper:4.1.6" />
+          <element id="library" level="project" name="Maven: com.github.jsqlparser:jsqlparser:0.9.6" />
+          <element id="library" level="project" name="Maven: tk.mybatis:mapper:3.3.9" />
+          <element id="library" level="project" name="Maven: javax.persistence:persistence-api:1.0" />
+          <element id="library" level="project" name="Maven: com.alibaba:druid:1.0.2" />
+          <element id="library" level="project" name="Maven: commons-dbcp:commons-dbcp:1.4" />
+          <element id="library" level="project" name="Maven: org.mybatis:mybatis:3.2.8" />
+          <element id="library" level="project" name="Maven: org.mybatis:mybatis-spring:1.2.2" />
+          <element id="library" level="project" name="Maven: mysql:mysql-connector-java:5.1.34" />
+          <element id="archive" name="idoc-pojo-1.0-SNAPSHOT.jar">
+            <element id="module-output" name="idoc-pojo" />
+          </element>
+        </element>
+      </element>
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/../../idoc-sso/target/idoc-sso/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="javaee-facet-resources" facet="idoc-sso/web/Web" />
+    </root>
+  </artifact>
+</component>

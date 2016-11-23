@@ -25,8 +25,8 @@
         <!--加载mybatis的配置文件-->
         <property name="configLocation" value="classpath:config/mybatis/SqlMapConfig.xml"/>
         <property name="dataSource" ref="dataSource"/>
-      <!--  &lt;!&ndash; 自动扫描mapping.xml文件 &ndash;&gt;
-        <property name="mapperLocations" value="classpath:com/swagger/idoc/mapper/*.xml"></property>-->
+      <!--  &lt;!&ndash; 自动扫描mapping.xml文件 &ndash;&gt;-->
+       <!-- <property name="mapperLocations" value="classpath:com/idoc/dao/mapper/*.xml"></property>-->
     </bean>
     <!-- hibernate 工厂类 暂时不整合hibernate-->
     <!--<bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
@@ -64,7 +64,7 @@
      spring容器中进行注册，用于mapper代理开发
      如果将mapper.xml和mapper接口的名称保持一致且放在一个目录 则不用在sqlMapConfig.xml中进行配置
      -->
-    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+    <bean class="tk.mybatis.spring.mapper.MapperScannerConfigurer">
         <!-- 指定扫描的 包名 如果需要扫描多个包，中间用半角逗号隔开-->
         <property name="basePackage" value="com.idoc.dao.mapper"/>
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>

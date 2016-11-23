@@ -12,7 +12,20 @@
 
     <artifactId>idoc-dao</artifactId>
     <dependencies>
-
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper</artifactId>
+        </dependency>
+        <!--Sql解析工具jsqlparser-->
+        <dependency>
+            <groupId>com.github.jsqlparser</groupId>
+            <artifactId>jsqlparser</artifactId>
+        </dependency>
+        <!--通用Mapper插件-->
+        <dependency>
+            <groupId>tk.mybatis</groupId>
+            <artifactId>mapper</artifactId>
+        </dependency>
         <!-- 阿里巴巴数据源包 -->
         <dependency>
             <groupId>com.alibaba</groupId>

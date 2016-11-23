@@ -2,6 +2,9 @@ package com.idoc.rest.service;
 
 import com.swagger.idoc.po.TDocInfo;
 
+import java.util.HashMap;
+import java.util.List;
+
 /**
  * CopyRright (c)2014-2016 Haerbin Hearglobal Co.,Ltd
  * Project: idoc-main
@@ -14,5 +17,6 @@ import com.swagger.idoc.po.TDocInfo;
  */
 
 public interface GetDocInfoByIdService {
-    TDocInfo getDocInfoById();
+    List getDocInfoById();
+    List getDocMapByPageHelper();
 }

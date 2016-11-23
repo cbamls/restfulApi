@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.idoc.dao.mapper.TDocInfoMapper" >
-  <resultMap id="BaseResultMap" type="com.swagger.idoc.po.TDocInfo" >
+ <!-- <resultMap id="BaseResultMap" type="com.swagger.idoc.po.TDocInfo" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="doc_id" property="docId" jdbcType="INTEGER" />
     <result column="version_doc" property="versionDoc" jdbcType="VARCHAR" />
@@ -12,8 +12,11 @@
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="com.swagger.idoc.po.TDocInfo" extends="BaseResultMap" >
     <result column="description" property="description" jdbcType="LONGVARCHAR" />
-  </resultMap>
-  <sql id="Example_Where_Clause" >
+  </resultMap>-->
+ <!-- <select id="getDocInfoById" parameterType="java.lang.Integer" resultType="map">
+    SELECT *  from t_doc_info where id = #{id,jdbcType=INTEGER}
+  </select>-->
+ <!-- <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
         <if test="criteria.valid" >
@@ -206,5 +209,5 @@
       name = #{name,jdbcType=VARCHAR},
       url = #{url,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
-  </update>
+  </update>-->
 </mapper>
