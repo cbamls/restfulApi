@@ -5,6 +5,8 @@ import com.idoc.sso.service.GetDocInfoByIdService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * CopyRright (c)2014-2016 Haerbin Hearglobal Co.,Ltd
  * Project: idoc-main
@@ -20,8 +22,8 @@ public class GetDocInfoByIdImpl implements GetDocInfoByIdService {
     @Autowired
     private TDocInfoMapper tDocInfoMapper;
     @Override
-    public TDocInfo getDocInfoById() {
-        TDocInfo tDocInfo = tDocInfoMapper.selectByPrimaryKey(1);
+    public List getDocInfoById() {
+        List tDocInfo = tDocInfoMapper.selectAll();
         return tDocInfo;
     }
 }

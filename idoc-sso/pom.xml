@@ -13,31 +13,7 @@
     <artifactId>idoc-sso</artifactId>
 
     <dependencies>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <!--日志相关 采用slf4j + log4j-->
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-log4j12</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>jcl-over-slf4j</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-        </dependency>
 
-        <!--日志相关 end-->
         <!-- spring需要的jar包 -->
         <dependency>
             <groupId>org.springframework</groupId>
@@ -107,6 +83,11 @@
         <dependency>
             <groupId>com.swagger.idoc</groupId>
             <artifactId>idoc-dao</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.swagger.idoc</groupId>
+            <artifactId>idoc-common</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>

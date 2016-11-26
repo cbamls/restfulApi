@@ -11,4 +11,5 @@
 
     <!--扫描包加载service实现类-->
     <context:component-scan base-package="com.idoc.sso.service.impl"/>
+
 </beans>

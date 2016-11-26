@@ -40,7 +40,7 @@ http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
         <!--pointcut元素定义一个切入点，execution中的第一个星号 用以匹配方法的返回类型，
             这里星号表明匹配所有返回类型。 com.simple.sso.service.*.*(..)表明匹配com.simple.sso.service包下的所有类的所有
             方法 -->
-        <aop:pointcut id="myPointcut" expression="execution(* com.idoc.service.impl.*.*(..))" />
+        <aop:pointcut id="myPointcut" expression="execution(* com.idoc.sso.service.impl.*.*(..))" />
         <!--将定义好的事务处理策略应用到上述的切入点 -->
         <aop:advisor advice-ref="txAdvice" pointcut-ref="myPointcut" />
 
