@@ -1,11 +1,7 @@
 package com.idoc.dao.mapper;
 
 import com.swagger.idoc.po.TDocInfo;
-import com.swagger.idoc.po.TDocInfoExample;
 import tk.mybatis.mapper.common.Mapper;
-
-import java.util.HashMap;
-import java.util.List;
 
 public interface TDocInfoMapper extends Mapper<TDocInfo> {
     //HashMap getDocInfoById(Integer id);

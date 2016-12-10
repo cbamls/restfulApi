@@ -1,6 +1,7 @@
 package com.idoc.common.utils;
 
 import org.apache.http.*;
+import org.apache.http.client.CookieStore;
 import org.apache.http.client.HttpRequestRetryHandler;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
@@ -8,6 +9,8 @@ import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpRequestBase;
+import org.apache.http.client.params.ClientPNames;
+import org.apache.http.client.params.CookiePolicy;
 import org.apache.http.client.protocol.HttpClientContext;
 import org.apache.http.conn.ssl.NoopHostnameVerifier;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
@@ -16,6 +19,7 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.entity.mime.content.StringBody;
+import org.apache.http.impl.client.AbstractHttpClient;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.*;
@@ -100,7 +104,7 @@ public class HttpUtils implements Closeable{
     private Integer socketTimeOut = 15000; //默认socket超时时间,单位:毫秒
     private Integer connectTimeOut = 15000; //默认connection超时时间,单位:毫秒
     private Integer connectRequestTimeOut = 15000; //默认connectRequest超时时间,单位:毫秒
-    private String charSet = "UTF-8";  //默认编码
+    private String charSet = "gb2312";  //默认编码
     private String emptyResult = "";  //默认空Response返回值
     private Boolean isMulti = false; //是否带文件上传
     private Boolean isRetry = false; //是否重试
@@ -361,7 +365,7 @@ public class HttpUtils implements Closeable{
                 builder.append(nvp.getName()).append(HTTP_PARAMS_EQUALS).append(nvp.getValue()).append(HTTP_PARAMS_SEPARATOR);
             }
         }
-        return new HttpGet(builder.substring(0, builder.lastIndexOf(HTTP_PARAMS_SEPARATOR)));
+        return new HttpGet(builder.substring(0, builder.lastIndexOf(HTTP_PARAMS_SEPARATOR) == -1 ? builder.length() - 1 : builder.lastIndexOf(HTTP_PARAMS_SEPARATOR)));
     }
 
     //构建get请求
@@ -459,8 +463,14 @@ public class HttpUtils implements Closeable{
                     .setSSLSocketFactory(socketFactory)
                     .build();
         }
+
         try (CloseableHttpResponse response = httpClient.execute(requestBase)) {
             result.setStatusCode(response.getStatusLine().getStatusCode());
+            for(Header header : response.getAllHeaders()) {
+               if(header.getName().equals("Set-Cookie")) {
+                   result.setCookies(header.toString());
+               }
+            }
             result.setHeaders(response.getAllHeaders());
             HttpEntity entity = response.getEntity();
             result.setContentEncoding(entity.getContentEncoding());
@@ -526,7 +536,7 @@ public class HttpUtils implements Closeable{
         private Header contentType; //contentType
         private Header contentEncoding; //编码
         private Long contentLength; //内容长度
-
+        private String cookies;
         public ResponseResult() {
         }
 
@@ -597,6 +607,14 @@ public class HttpUtils implements Closeable{
                     ", contentEncoding='" + contentEncoding + '\'' +
                     ", contentLength=" + contentLength +
                     '}';
+        }
+
+        public String  getCookies() {
+            return cookies;
+        }
+
+        public void setCookies(String  cookies) {
+            this.cookies = cookies;
         }
     }
 
@@ -700,7 +718,7 @@ public class HttpUtils implements Closeable{
     //释放资源
     @Override
     public void close() throws IOException {
-        this.headers = Collections.emptyList();
+        this.headers = new LinkedList<>();
         this.params = Collections.emptyList();
     }
 }

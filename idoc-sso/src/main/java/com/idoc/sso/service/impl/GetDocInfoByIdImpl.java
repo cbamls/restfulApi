@@ -22,8 +22,8 @@ public class GetDocInfoByIdImpl implements GetDocInfoByIdService {
     @Autowired
     private TDocInfoMapper tDocInfoMapper;
     @Override
-    public List getDocInfoById() {
-        List tDocInfo = tDocInfoMapper.selectAll();
+    public TDocInfo getDocInfoById() {
+        TDocInfo tDocInfo = tDocInfoMapper.selectByPrimaryKey(String.valueOf(1));
         return tDocInfo;
     }
 }

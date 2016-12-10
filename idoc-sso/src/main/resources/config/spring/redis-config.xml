@@ -12,8 +12,7 @@
 
     <bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig" >
         <property name="maxIdle" value="${redis.maxIdle}" />
-        <property name="maxActive" value="${redis.maxActive}" />
-        <property name="maxWait" value="${redis.maxWait}" />
+
         <property name="testOnBorrow" value="${redis.testOnBorrow}" />
     </bean>
 
@@ -38,7 +37,7 @@
         <constructor-arg name="port" value="6379"/>
     </bean>
     <!-- 配置redis客户端实现类 -->
-    <bean id="jedisClientSingle" class="com.idoc.sso.jedisUtils.impl.JedisUtilSingle"/>
+    <bean id="jedisClientSingle" class="com.idoc.common.utils.JedisClientSingle"/>
 
     <!-- 配置redis客户端集群版 -->
     <!--<bean id="jedisCluster" class="redis.clients.jedis.JedisCluster">

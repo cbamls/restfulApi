@@ -16,5 +16,5 @@ import java.util.List;
  */
 
 public interface GetDocInfoByIdService {
-    List getDocInfoById();
+    TDocInfo getDocInfoById();
 }
